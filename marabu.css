@@ -1,14 +1,14 @@
 body::before {
     content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("https://i1.sndcdn.com/artworks-wfHVnCIJdfZiO0v6-sJ5ljQ-t500x500.jpg");
-    background-size: cover;
-    background-position: center;
-    opacity: 1; /* Transparent so you can still see the editor */
-    z-index: -1;
-    pointer-events: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-image: url("https://i1.sndcdn.com/artworks-wfHVnCIJdfZiO0v6-sJ5ljQ-t500x500.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    opacity: 1 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
 }
