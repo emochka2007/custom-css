@@ -1,0 +1,317 @@
+/* Realistic Pacman Game Emulation for VS Code */
+
+
+.monaco-editor {
+  position: relative;
+  overflow: hidden;
+  background: #000011;
+  border: 3px solid #0000ff;
+}
+
+/* maze-like structure with grid lines */
+.monaco-editor::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 19px,
+      rgba(0, 0, 255, 0.1) 20px,
+      rgba(0, 0, 255, 0.1) 20px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 19px,
+      rgba(0, 0, 255, 0.1) 20px,
+      rgba(0, 0, 255, 0.1) 20px
+    );
+  z-index: 990;
+  pointer-events: none;
+}
+
+/* pacman */
+.monaco-editor::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ffff00;
+  border-radius: 50%;
+  z-index: 1000;
+  pointer-events: none;
+  animation: movePacmanMaze 25s linear infinite, pacmanMouthChamp 0.3s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255, 255, 0, 0.9);
+  border: 1px solid #ffdd00;
+}
+
+/* ghost 1 */
+.monaco-editor .view-lines::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 22px;
+  background: 
+    linear-gradient(to bottom, #ff0000 0%, #ff0000 70%, transparent 70%),
+    radial-gradient(circle at 4px bottom, transparent 1px, transparent 2px, #ff0000 2px, #ff0000 4px, transparent 4px),
+    radial-gradient(circle at 10px bottom, transparent 1px, transparent 2px, #ff0000 2px, #ff0000 4px, transparent 4px),
+    radial-gradient(circle at 16px bottom, transparent 1px, transparent 2px, #ff0000 2px, #ff0000 4px, transparent 4px);
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #cc0000;
+  z-index: 999;
+  pointer-events: none;
+  animation: moveBlinkyChase 27s linear infinite, ghostFloat 0.8s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.7);
+}
+
+/* ghost 2 */
+.monaco-editor .view-lines::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 22px;
+  background: 
+    linear-gradient(to bottom, #ffb8ff 0%, #ffb8ff 70%, transparent 70%),
+    radial-gradient(circle at 4px bottom, transparent 1px, transparent 2px, #ffb8ff 2px, #ffb8ff 4px, transparent 4px),
+    radial-gradient(circle at 10px bottom, transparent 1px, transparent 2px, #ffb8ff 2px, #ffb8ff 4px, transparent 4px),
+    radial-gradient(circle at 16px bottom, transparent 1px, transparent 2px, #ffb8ff 2px, #ffb8ff 4px, transparent 4px);
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #ff88ff;
+  z-index: 998;
+  pointer-events: none;
+  animation: movePinkyAmbush 29s linear infinite, ghostFloat 0.9s ease-in-out infinite alternate;
+  box-shadow: 0 0 6px rgba(255, 184, 255, 0.7);
+}
+
+/* ghost 3 */
+.monaco-editor .monaco-scrollable-element::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 22px;
+  background: 
+    linear-gradient(to bottom, #00ffff 0%, #00ffff 70%, transparent 70%),
+    radial-gradient(circle at 4px bottom, transparent 1px, transparent 2px, #00ffff 2px, #00ffff 4px, transparent 4px),
+    radial-gradient(circle at 10px bottom, transparent 1px, transparent 2px, #00ffff 2px, #00ffff 4px, transparent 4px),
+    radial-gradient(circle at 16px bottom, transparent 1px, transparent 2px, #00ffff 2px, #00ffff 4px, transparent 4px);
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #00cccc;
+  z-index: 997;
+  pointer-events: none;
+  animation: moveInkyScatter 31s linear infinite, ghostFloat 1s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.7);
+}
+
+/* ghost 4 */
+.monaco-editor .monaco-scrollable-element::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 22px;
+  background: 
+    linear-gradient(to bottom, #ffaa00 0%, #ffaa00 70%, transparent 70%),
+    radial-gradient(circle at 4px bottom, transparent 1px, transparent 2px, #ffaa00 2px, #ffaa00 4px, transparent 4px),
+    radial-gradient(circle at 10px bottom, transparent 1px, transparent 2px, #ffaa00 2px, #ffaa00 4px, transparent 4px),
+    radial-gradient(circle at 16px bottom, transparent 1px, transparent 2px, #ffaa00 2px, #ffaa00 4px, transparent 4px);
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #cc8800;
+  z-index: 996;
+  pointer-events: none;
+  animation: moveClydeShyness 33s linear infinite, ghostFloat 0.7s ease-in-out infinite alternate-reverse;
+  box-shadow: 0 0 6px rgba(255, 170, 0, 0.7);
+}
+
+/* dots */
+.monaco-editor .decorationsOverviewRuler::before {
+  content: '• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •';
+  position: absolute;
+  top: 25%;
+  left: 5%;
+  right: 5%;
+  color: #ffff00;
+  font-size: 12px;
+  letter-spacing: 15px;
+  line-height: 20px;
+  z-index: 995;
+  pointer-events: none;
+  opacity: 0.9;
+  animation: dotFlicker 2s ease-in-out infinite;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.monaco-editor .decorationsOverviewRuler::after {
+  content: '• • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • • •';
+  position: absolute;
+  bottom: 25%;
+  left: 5%;
+  right: 5%;
+  color: #ffff00;
+  font-size: 12px;
+  letter-spacing: 15px;
+  line-height: 20px;
+  z-index: 995;
+  pointer-events: none;
+  opacity: 0.9;
+  animation: dotFlicker 2s ease-in-out infinite reverse;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* power pellet */
+.monaco-editor .margin::after {
+  content: '●    ●';
+  position: absolute;
+  top: 30%;
+  right: 10px;
+  color: #ffff00;
+  font-size: 18px;
+  letter-spacing: 30px;
+  z-index: 994;
+  pointer-events: none;
+  animation: powerPelletPulse 1s ease-in-out infinite;
+  text-shadow: 0 0 6px #ffff00;
+}
+
+/* pacman mouth */
+@keyframes pacmanMouthChamp {
+  0% {
+    clip-path: polygon(100% 50%, 50% 50%, 100% 50%, 0% 100%, 0% 0%);
+  }
+  25% {
+    clip-path: polygon(100% 50%, 75% 25%, 75% 75%, 0% 100%, 0% 0%);
+  }
+  50% {
+    clip-path: polygon(100% 50%, 90% 10%, 90% 90%, 0% 100%, 0% 0%);
+  }
+  75% {
+    clip-path: polygon(100% 50%, 75% 25%, 75% 75%, 0% 100%, 0% 0%);
+  }
+  100% {
+    clip-path: polygon(100% 50%, 50% 50%, 100% 50%, 0% 100%, 0% 0%);
+  }
+}
+
+/* pacman maze */
+@keyframes movePacmanMaze {
+  0% { top: 60px; left: 20px; transform: rotate(0deg); }
+  20% { top: 60px; left: calc(100% - 40px); transform: rotate(0deg); }
+  22% { transform: rotate(90deg); }
+  40% { top: calc(100% - 80px); left: calc(100% - 40px); transform: rotate(90deg); }
+  42% { transform: rotate(180deg); }
+  60% { top: calc(100% - 80px); left: 20px; transform: rotate(180deg); }
+  62% { transform: rotate(270deg); }
+  80% { top: 60px; left: 20px; transform: rotate(270deg); }
+  82% { transform: rotate(0deg); }
+  100% { top: 60px; left: 20px; transform: rotate(0deg); }
+}
+
+/* Blinky - Aggressive direct chase behavior */
+@keyframes moveBlinkyChase {
+  0% { top: 80px; left: 40px; }
+  25% { top: 80px; left: calc(100% - 60px); }
+  45% { top: calc(100% - 100px); left: calc(100% - 60px); }
+  70% { top: calc(100% - 100px); left: 40px; }
+  100% { top: 80px; left: 40px; }
+}
+
+/* Pinky - Ambush behavior (targets ahead of Pacman) */
+@keyframes movePinkyAmbush {
+  0% { top: 100px; left: 60px; }
+  30% { top: 100px; left: calc(100% - 80px); }
+  50% { top: calc(100% - 120px); left: calc(100% - 80px); }
+  80% { top: calc(100% - 120px); left: 60px; }
+  100% { top: 100px; left: 60px; }
+}
+
+/* Inky - Scatter/Chase with complex patterns */
+@keyframes moveInkyScatter {
+  0% { top: 120px; left: 80px; }
+  20% { top: 80px; left: 120px; }
+  40% { top: 80px; left: calc(100% - 100px); }
+  60% { top: calc(100% - 140px); left: calc(100% - 100px); }
+  80% { top: calc(100% - 140px); left: 80px; }
+  100% { top: 120px; left: 80px; }
+}
+
+/* Clyde - Shy behavior (approach then retreat) */
+@keyframes moveClydeShyness {
+  0% { top: 140px; left: 100px; }
+  25% { top: 100px; left: 140px; }
+  50% { top: 100px; left: calc(100% - 120px); }
+  75% { top: calc(100% - 160px); left: calc(100% - 120px); }
+  100% { top: 140px; left: 100px; }
+}
+
+/* Ghost floating animation */
+@keyframes ghostFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Dot flickering effect */
+@keyframes dotFlicker {
+  0%, 100% { opacity: 0.8; }
+  25% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+  75% { opacity: 0.3; }
+}
+
+/* Power pellet pulsing */
+@keyframes powerPelletPulse {
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 1; 
+    text-shadow: 0 0 4px #ffff00;
+  }
+  50% { 
+    transform: scale(1.3); 
+    opacity: 0.7; 
+    text-shadow: 0 0 8px #ffff00, 0 0 12px #ffff00;
+  }
+}
+
+/* Game UI Elements */
+.monaco-editor .margin {
+  border-right: 2px solid #0000ff;
+}
+
+/* Score display */
+.monaco-editor .margin {
+  position: relative;
+}
+
+.monaco-editor .margin::before {
+  content: 'SCORE: 00000    1UP' !important;
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  color: #ffff00 !important;
+  font-family: 'Courier New', monospace !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  z-index: 1001 !important;
+  pointer-events: none !important;
+  text-shadow: 0 0 4px rgba(255, 255, 0, 0.8) !important;
+  background: transparent !important;
+}
+
+/* Maze walls effect */
+.monaco-editor .view-lines {
+  background-image: 
+    linear-gradient(90deg, transparent 48%, rgba(0, 0, 255, 0.3) 49%, rgba(0, 0, 255, 0.3) 51%, transparent 52%);
+}
+
+/* Game border with neon effect */
+.monaco-editor {
+  border: 3px solid #0088ff;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 136, 255, 0.3),
+    0 0 10px rgba(0, 136, 255, 0.5);
+  background: radial-gradient(circle at center, #000022 0%, #000011 100%);
+} 
