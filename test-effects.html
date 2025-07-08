@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Effects Test Page</title>
+    <style>
+        :root {
+            --editor-bg: #1e1e1e;
+            --editor-fg: #d4d4d4;
+            --line-number-color: #858585;
+        }
+        
+        body {
+            font-family: 'Consolas', 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            background-color: #252526;
+            color: #d4d4d4;
+        }
+        
+        h1, h2 {
+            color: #ffffff;
+        }
+        
+        .controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #333333;
+            border-radius: 5px;
+        }
+        
+        select, button {
+            padding: 8px 12px;
+            margin-right: 10px;
+            background-color: #0e639c;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        select:hover, button:hover {
+            background-color: #1177bb;
+        }
+        
+        .editor-container {
+            position: relative;
+            height: 500px;
+            border: 1px solid #454545;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .monaco-editor {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background-color: var(--editor-bg);
+            color: var(--editor-fg);
+            overflow: hidden;
+        }
+        
+        .monaco-editor .view-lines {
+            position: relative;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            padding: 10px 0 10px 60px;
+            height: calc(100% - 20px);
+            overflow: auto;
+        }
+        
+        .monaco-editor .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 50px;
+            height: calc(100% - 20px);
+            text-align: right;
+            padding-right: 10px;
+            color: var(--line-number-color);
+            user-select: none;
+        }
+        
+        .monaco-editor .line {
+            padding: 0 10px;
+            white-space: pre;
+        }
+        
+        .monaco-editor .line:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .comment { color: #6a9955; }
+        .function { color: #dcdcaa; }
+        .variable { color: #9cdcfe; }
+        .number { color: #b5cea8; }
+        .operator { color: #d4d4d4; }
+        .type { color: #4ec9b0; }
+        
+        .active-effect {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>CSS Effects Test Page</h1>
+    
+    <div class="controls">
+        <h2>Select an Effect</h2>
+        <select id="effectSelector">
+            <option value="none">No Effect</option>
+            <option value="disco.css">Disco</option>
+            <option value="snake.css">Snake</option>
+            <option value="bw-disco.css">BW Disco</option>
+            <!-- Other effects will be added dynamically -->
+        </select>
+        <button id="applyEffect">Apply Effect</button>
+        <button id="removeEffect">Remove Effect</button>
+    </div>
+    
+    <div class="editor-container">
+        <div class="monaco-editor">
+            <div class="line-numbers">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>10</div>
+                <div>11</div>
+                <div>12</div>
+                <div>13</div>
+                <div>14</div>
+                <div>15</div>
+                <div>16</div>
+                <div>17</div>
+                <div>18</div>
+                <div>19</div>
+                <div>20</div>
+            </div>
+            <div class="view-lines">
+                <div class="line"><span class="keyword">function</span> <span class="function">testFunction</span>(<span class="variable">param1</span>, <span class="variable">param2</span>) {</div>
+                <div class="line">    <span class="comment">// This is a sample code to demonstrate CSS effects</span></div>
+                <div class="line">    <span class="keyword">const</span> <span class="variable">result</span> = <span class="variable">param1</span> <span class="operator">+</span> <span class="variable">param2</span>;</div>
+                <div class="line">    </div>
+                <div class="line">    <span class="keyword">if</span> (<span class="variable">result</span> <span class="operator">></span> <span class="number">10</span>) {</div>
+                <div class="line">        <span class="keyword">return</span> <span class="string">"Result is greater than 10"</span>;</div>
+                <div class="line">    } <span class="keyword">else</span> {</div>
+                <div class="line">        <span class="keyword">return</span> <span class="string">"Result is less than or equal to 10"</span>;</div>
+                <div class="line">    }</div>
+                <div class="line">}</div>
+                <div class="line"></div>
+                <div class="line"><span class="keyword">class</span> <span class="type">TestClass</span> {</div>
+                <div class="line">    <span class="function">constructor</span>() {</div>
+                <div class="line">        <span class="keyword">this</span>.<span class="variable">value</span> = <span class="number">42</span>;</div>
+                <div class="line">    }</div>
+                <div class="line">    </div>
+                <div class="line">    <span class="function">getValue</span>() {</div>
+                <div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.<span class="variable">value</span>;</div>
+                <div class="line">    }</div>
+                <div class="line">}</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="active-effect" id="activeEffect">No effect applied</div>
+
+    <script>
+        // Get all CSS files in the directory
+        const cssFiles = [
+            "black-zolo.css", "blur.css", "breakdown.css", "burn.css", 
+            "bw-disco.css", "chaos-1.css", "custom.css", "delay.css", 
+            "disco.css", "eye-strain.css", "flicker.css", "flip.css", 
+            "font-size-extreme.css", "hell.css", "hide-cursor.css", 
+            "intense-light.css", "invis.css", "italic.css", 
+            "marabu-emo.css", "marabu.css", "move-cursor.css", 
+            "rainbow.css", "ru.css", "shake.css", "shift.css", 
+            "snake.css", "spin.css", "style.css", "ua.css", 
+            "upside-down.css", "us.css", "void.css", "where-am-i.css"
+        ];
+        
+        // Populate the dropdown with all CSS files
+        const effectSelector = document.getElementById('effectSelector');
+        
+        // Clear existing options except the first one
+        while (effectSelector.options.length > 1) {
+            effectSelector.remove(1);
+        }
+        
+        // Add all CSS files to the dropdown
+        cssFiles.forEach(file => {
+            const option = document.createElement('option');
+            option.value = file;
+            option.textContent = file.replace('.css', '');
+            effectSelector.appendChild(option);
+        });
+        
+        // Current style element
+        let currentStyleElement = null;
+        
+        // Apply effect button
+        document.getElementById('applyEffect').addEventListener('click', () => {
+            const selectedEffect = effectSelector.value;
+            
+            // Remove current effect if any
+            if (currentStyleElement) {
+                document.head.removeChild(currentStyleElement);
+                currentStyleElement = null;
+            }
+            
+            // If an effect is selected (not "none")
+            if (selectedEffect !== 'none') {
+                // Create a new style element
+                currentStyleElement = document.createElement('link');
+                currentStyleElement.rel = 'stylesheet';
+                currentStyleElement.href = selectedEffect;
+                document.head.appendChild(currentStyleElement);
+                
+                // Update active effect display
+                document.getElementById('activeEffect').textContent = `Active: ${selectedEffect}`;
+            } else {
+                document.getElementById('activeEffect').textContent = 'No effect applied';
+            }
+        });
+        
+        // Remove effect button
+        document.getElementById('removeEffect').addEventListener('click', () => {
+            if (currentStyleElement) {
+                document.head.removeChild(currentStyleElement);
+                currentStyleElement = null;
+                document.getElementById('activeEffect').textContent = 'No effect applied';
+                effectSelector.value = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
