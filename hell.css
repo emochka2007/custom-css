@@ -1,0 +1,8 @@
+.monaco-editor .margin .line-numbers {
+  animation: jitter 0.3s infinite;
+}
+
+.monaco-editor .view-lines {
+  filter: blur(1.5px);
+  transform: skewX(5deg);
+}

@@ -1,0 +1,30 @@
+/* Скрыть весь текст редактора */
+.monaco-editor .view-lines {
+    color: transparent !important;
+}
+
+/* Показывать флаг США при выделении текста */
+::selection {
+    background: repeating-linear-gradient(
+            to bottom,
+            #b22234 0,
+            #b22234 7.69%,       /* Red stripe height */
+            #ffffff 7.69%,
+            #ffffff 15.38%        /* White stripe height */
+    );
+    color: black !important;
+}
+
+/* Синий прямоугольник с белыми звёздами — эмуляция через псевдоэлемент (невозможно идеально без изображений) */
+.monaco-editor .view-lines::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 46%;
+    background-color: #3c3b6e;
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+}

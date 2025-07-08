@@ -1,0 +1,12 @@
+.monaco-editor .cursor {
+  animation: rainbow-cursor 0.3s infinite;
+}
+
+@keyframes rainbow-cursor {
+  0%   { border-color: red; }
+  20%  { border-color: orange; }
+  40%  { border-color: yellow; }
+  60%  { border-color: green; }
+  80%  { border-color: blue; }
+  100% { border-color: violet; }
+}

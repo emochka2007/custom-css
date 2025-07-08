@@ -1,0 +1,47 @@
+body {
+  animation: spinny 5s infinite linear;
+  filter: hue-rotate(180deg) invert(1) contrast(200%);
+  cursor: none !important;
+}
+
+.monaco-editor {
+  transform: scaleX(-1) rotate(180deg);
+  animation: shakey 0.1s infinite alternate;
+}
+
+.monaco-editor .view-lines {
+  font-family: Comic Sans MS, cursive !important;
+  text-shadow: 2px 2px 0 lime, -2px -2px 0 magenta;
+  animation: rainbow 1s infinite;
+}
+
+img, canvas {
+  transform: rotate(180deg) scale(1.5);
+}
+
+.statusbar, .activitybar, .titlebar {
+  animation: blink 0.5s infinite alternate;
+}
+
+@keyframes spinny {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes shakey {
+  0% { margin-left: -2px; }
+  100% { margin-left: 2px; }
+}
+
+@keyframes rainbow {
+  0% { color: red; }
+  25% { color: yellow; }
+  50% { color: lime; }
+  75% { color: cyan; }
+  100% { color: magenta; }
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  100% { opacity: 0.2; }
+}

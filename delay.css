@@ -1,0 +1,8 @@
+.monaco-editor .view-lines span {
+  visibility: hidden;
+  animation: appear 2s forwards;
+}
+
+@keyframes appear {
+  to { visibility: visible; }
+}

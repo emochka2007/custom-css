@@ -1,0 +1,14 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    #0057b7 50%,   /* Blue */
+    #ffd700 50%    /* Yellow */
+  );
+}

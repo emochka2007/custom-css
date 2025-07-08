@@ -1,0 +1,40 @@
+.monaco-editor {
+  background-color: #ffffff !important;
+  color: #ff00ff !important;
+}
+
+.monaco-editor .view-lines span {
+  color: #ff0000 !important; /* bright red text */
+  background-color: #00ffff !important; /* cyan background */
+  font-weight: bold;
+  text-shadow: 0 0 3px #ff0, 0 0 5px #00f;
+}
+
+.monaco-editor .cursor {
+  background-color: #0000ff !important; /* blue cursor */
+  border-left: 2px solid #00ff00 !important; /* neon green border */
+}
+
+.monaco-editor .margin {
+  background-color: #ffff00 !important; /* bright yellow gutter */
+  color: #000000 !important;
+}
+
+.monaco-editor .line-numbers {
+  color: #ff00ff !important; /* magenta line numbers */
+  font-weight: bold;
+}
+
+.monaco-editor .selected-text {
+  background-color: #ff6600 !important; /* orange highlight */
+  color: #000000 !important;
+}
+
+.monaco-editor .current-line {
+  background-color: #ffffcc !important; /* pale yellow for current line */
+}
+
+.monaco-editor .bracket-match {
+  background-color: #00ff00 !important; /* green matching brackets */
+  border: 1px solid #ff0000;
+}

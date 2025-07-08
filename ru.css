@@ -1,0 +1,15 @@
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    white 33.33%,
+    #0033a0 33.33% 66.66%,
+    #d52b1e 66.66%
+  );
+}

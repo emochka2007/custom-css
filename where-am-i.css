@@ -1,0 +1,11 @@
+.monaco-workbench {
+  transform: scaleX(-1) scaleY(-1);
+}
+
+.monaco-editor .cursor {
+  opacity: 0 !important;
+}
+
+.monaco-editor .view-lines span {
+  color: transparent !important;
+}

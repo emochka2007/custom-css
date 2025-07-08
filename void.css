@@ -1,0 +1,9 @@
+.monaco-editor .cursor {
+  margin-left: 20px !important;
+  opacity: 0;
+}
+
+.monaco-editor .view-lines span {
+  visibility: hidden;
+  animation: appear 3s forwards;
+}

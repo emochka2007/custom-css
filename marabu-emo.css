@@ -1,0 +1,14 @@
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://media.discordapp.net/attachments/1358892134836731988/1392238589609509035/photo_2025-07-08_23-16-09.jpg?ex=686eceba&is=686d7d3a&hm=7ac58d285daabd3c909fe9ed7cad9646740e386ece0cf6612e9da53d3405d092&=&format=webp&width=1838&height=1840");
+    background-size: cover;
+    background-position: center;
+    opacity: 1; /* Transparent so you can still see the editor */
+    z-index: -1;
+    pointer-events: none;
+}

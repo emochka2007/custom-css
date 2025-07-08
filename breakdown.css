@@ -1,0 +1,8 @@
+.monaco-editor .view-lines {
+  filter: invert(100%) blur(2px);
+  transform: rotate(2deg) scaleX(-1);
+}
+
+.monaco-editor .margin .line-numbers {
+  opacity: 0.2;
+}

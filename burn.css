@@ -1,0 +1,14 @@
+/* Use with caution. This affects syntax tokens */
+.token.keyword {
+  color: #ff00ff !important;
+}
+.token.string {
+  color: #00ff00 !important;
+}
+.token.comment {
+  color: #888888 !important;
+  font-style: italic;
+}
+.token.number {
+  color: #ff0000 !important;
+}

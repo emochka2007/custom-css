@@ -1,0 +1,9 @@
+.monaco-editor .view-lines {
+  animation: flicker 0.2s infinite;
+}
+
+@keyframes flicker {
+  0% { background: #111; }
+  50% { background: #fff; }
+  100% { background: #111; }
+}
