@@ -1,0 +1,479 @@
+/* Flying Bird Effect for Monaco Editor */
+.monaco-editor {
+  position: relative;
+  overflow: hidden;
+  /* Add a subtle sky gradient background effect */
+  background-image: linear-gradient(to bottom, rgba(135, 206, 250, 0.05), rgba(0, 0, 0, 0));
+}
+
+/* Add cloud effects */
+.monaco-editor .scrollbar::before {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  top: 15%;
+  left: 10%;
+  z-index: 990;
+  filter: blur(5px);
+  animation: cloudDrift1 60s linear infinite;
+}
+
+.monaco-editor .scrollbar::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  top: 35%;
+  left: 70%;
+  z-index: 989;
+  filter: blur(6px);
+  animation: cloudDrift2 75s linear infinite;
+}
+
+/* Cloud animations */
+@keyframes cloudDrift1 {
+  from { left: -10%; }
+  to { left: 110%; }
+}
+
+@keyframes cloudDrift2 {
+  from { left: 110%; }
+  to { left: -20%; }
+}
+
+/* Add a subtle flock behavior trigger */
+.monaco-editor:hover .view-lines::before,
+.monaco-editor:hover .view-lines::after,
+.monaco-editor:hover .view-overlays::before,
+.monaco-editor:hover .view-overlays::after,
+.monaco-editor:hover::before {
+  animation-duration: 8s; /* Birds fly faster when hovered */
+  animation-timing-function: ease-in-out;
+}
+
+/* Create the bird using pseudo-element */
+.monaco-editor::before {
+  content: '🐦';
+  position: absolute;
+  font-size: 16px;
+  z-index: 1000;
+  pointer-events: none;
+  animation: flyingBird 15s infinite;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  transform-origin: center;
+}
+
+/* Create a trail effect for the bird */
+.monaco-editor::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(135, 206, 250, 0.6);
+  z-index: 999;
+  pointer-events: none;
+  animation: birdTrail 15s infinite;
+  filter: blur(2px);
+}
+
+/* Animation for random bird flight */
+@keyframes flyingBird {
+  0% {
+    top: 10%;
+    left: 10%;
+    transform: scale(1) rotate(0deg);
+  }
+  10% {
+    top: 20%;
+    left: 30%;
+    transform: scale(1.1) rotate(15deg);
+  }
+  20% {
+    top: 15%;
+    left: 60%;
+    transform: scale(0.9) rotate(-10deg);
+  }
+  30% {
+    top: 40%;
+    left: 80%;
+    transform: scale(1) rotate(5deg);
+  }
+  40% {
+    top: 60%;
+    left: 70%;
+    transform: scale(1.1) rotate(-5deg);
+  }
+  50% {
+    top: 75%;
+    left: 40%;
+    transform: scale(0.9) rotate(10deg);
+  }
+  60% {
+    top: 65%;
+    left: 20%;
+    transform: scale(1) rotate(0deg);
+  }
+  70% {
+    top: 45%;
+    left: 15%;
+    transform: scale(1.1) rotate(-15deg);
+  }
+  80% {
+    top: 30%;
+    left: 35%;
+    transform: scale(0.9) rotate(5deg);
+  }
+  90% {
+    top: 20%;
+    left: 60%;
+    transform: scale(1) rotate(-5deg);
+  }
+  100% {
+    top: 10%;
+    left: 10%;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Animation for the trail following the bird */
+@keyframes birdTrail {
+  0% {
+    top: calc(10% + 8px);
+    left: calc(10% + 8px);
+    opacity: 0.8;
+  }
+  10% {
+    top: calc(20% + 8px);
+    left: calc(30% + 8px);
+    opacity: 0.7;
+  }
+  20% {
+    top: calc(15% + 8px);
+    left: calc(60% + 8px);
+    opacity: 0.6;
+  }
+  30% {
+    top: calc(40% + 8px);
+    left: calc(80% + 8px);
+    opacity: 0.7;
+  }
+  40% {
+    top: calc(60% + 8px);
+    left: calc(70% + 8px);
+    opacity: 0.8;
+  }
+  50% {
+    top: calc(75% + 8px);
+    left: calc(40% + 8px);
+    opacity: 0.7;
+  }
+  60% {
+    top: calc(65% + 8px);
+    left: calc(20% + 8px);
+    opacity: 0.6;
+  }
+  70% {
+    top: calc(45% + 8px);
+    left: calc(15% + 8px);
+    opacity: 0.7;
+  }
+  80% {
+    top: calc(30% + 8px);
+    left: calc(35% + 8px);
+    opacity: 0.8;
+  }
+  90% {
+    top: calc(20% + 8px);
+    left: calc(60% + 8px);
+    opacity: 0.7;
+  }
+  100% {
+    top: calc(10% + 8px);
+    left: calc(10% + 8px);
+    opacity: 0.8;
+  }
+}
+
+/* Add a second bird for more visual interest */
+.monaco-editor .view-lines::before {
+  content: '🕊️';
+  position: absolute;
+  font-size: 14px;
+  z-index: 998;
+  pointer-events: none;
+  animation: flyingBird2 18s infinite, flap 0.8s infinite alternate;
+  animation-delay: 3s, 0s;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  transform-origin: center;
+}
+
+/* Add a third bird - a blue bird */
+.monaco-editor .view-lines::after {
+  content: '🐦';
+  position: absolute;
+  font-size: 12px;
+  color: #1da1f2; /* Twitter blue color */
+  z-index: 997;
+  pointer-events: none;
+  animation: flyingBird3 22s infinite, flap 1.2s infinite alternate;
+  animation-delay: 1s, 0.3s;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  transform-origin: center;
+}
+
+/* Add a fourth bird - a yellow bird */
+.monaco-editor .view-overlays::before {
+  content: '🐤';
+  position: absolute;
+  font-size: 11px;
+  z-index: 996;
+  pointer-events: none;
+  animation: flyingBird4 16s infinite, flap 0.6s infinite alternate;
+  animation-delay: 5s, 0.1s;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  transform-origin: center;
+}
+
+/* Add a fifth bird - a parrot */
+.monaco-editor .view-overlays::after {
+  content: '🦜';
+  position: absolute;
+  font-size: 15px;
+  z-index: 995;
+  pointer-events: none;
+  animation: flyingBird5 25s infinite, flap 1s infinite alternate;
+  animation-delay: 7s, 0.5s;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  transform-origin: center;
+}
+
+/* Add a sixth bird - an owl */
+.monaco-editor .decorationsOverviewRuler::before {
+  content: '🦉';
+  position: absolute;
+  font-size: 16px;
+  z-index: 994;
+  pointer-events: none;
+  animation: flyingBird6 30s infinite;
+  animation-delay: 10s;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7);
+  transform-origin: center;
+}
+
+/* Animation for the second bird */
+@keyframes flyingBird2 {
+  0% {
+    top: 80%;
+    left: 85%;
+    transform: scale(0.8) rotate(0deg);
+  }
+  15% {
+    top: 65%;
+    left: 60%;
+    transform: scale(0.9) rotate(-10deg);
+  }
+  30% {
+    top: 70%;
+    left: 30%;
+    transform: scale(0.8) rotate(15deg);
+  }
+  45% {
+    top: 50%;
+    left: 20%;
+    transform: scale(0.9) rotate(0deg);
+  }
+  60% {
+    top: 30%;
+    left: 40%;
+    transform: scale(0.8) rotate(-15deg);
+  }
+  75% {
+    top: 40%;
+    left: 70%;
+    transform: scale(0.9) rotate(10deg);
+  }
+  90% {
+    top: 60%;
+    left: 90%;
+    transform: scale(0.8) rotate(0deg);
+  }
+  100% {
+    top: 80%;
+    left: 85%;
+    transform: scale(0.8) rotate(0deg);
+  }
+}
+
+/* Add occasional flapping effect */
+@keyframes flap {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1, 0.9);
+  }
+}
+
+/* Animation for the third bird */
+@keyframes flyingBird3 {
+  0% {
+    top: 50%;
+    left: 5%;
+    transform: scale(0.7) rotate(5deg);
+  }
+  20% {
+    top: 25%;
+    left: 20%;
+    transform: scale(0.8) rotate(-10deg);
+  }
+  40% {
+    top: 10%;
+    left: 40%;
+    transform: scale(0.7) rotate(15deg);
+  }
+  60% {
+    top: 30%;
+    left: 65%;
+    transform: scale(0.8) rotate(-5deg);
+  }
+  80% {
+    top: 45%;
+    left: 85%;
+    transform: scale(0.7) rotate(10deg);
+  }
+  100% {
+    top: 50%;
+    left: 5%;
+    transform: scale(0.7) rotate(5deg);
+  }
+}
+
+/* Animation for the fourth bird */
+@keyframes flyingBird4 {
+  0% {
+    top: 85%;
+    left: 15%;
+    transform: scale(0.6) rotate(-5deg);
+  }
+  25% {
+    top: 65%;
+    left: 35%;
+    transform: scale(0.7) rotate(10deg);
+  }
+  50% {
+    top: 75%;
+    left: 60%;
+    transform: scale(0.6) rotate(-15deg);
+  }
+  75% {
+    top: 90%;
+    left: 80%;
+    transform: scale(0.7) rotate(5deg);
+  }
+  100% {
+    top: 85%;
+    left: 15%;
+    transform: scale(0.6) rotate(-5deg);
+  }
+}
+
+/* Animation for the fifth bird */
+@keyframes flyingBird5 {
+  0% {
+    top: 15%;
+    left: 90%;
+    transform: scale(0.9) rotate(-10deg);
+  }
+  20% {
+    top: 30%;
+    left: 75%;
+    transform: scale(1) rotate(5deg);
+  }
+  40% {
+    top: 20%;
+    left: 50%;
+    transform: scale(0.9) rotate(-5deg);
+  }
+  60% {
+    top: 35%;
+    left: 25%;
+    transform: scale(1) rotate(10deg);
+  }
+  80% {
+    top: 25%;
+    left: 10%;
+    transform: scale(0.9) rotate(-15deg);
+  }
+  100% {
+    top: 15%;
+    left: 90%;
+    transform: scale(0.9) rotate(-10deg);
+  }
+}
+
+/* Animation for the sixth bird */
+@keyframes flyingBird6 {
+  0% {
+    top: 60%;
+    left: 50%;
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  11% {
+    top: 20%;
+    left: 30%;
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.9;
+  }
+  30% {
+    opacity: 0.1;
+  }
+  31% {
+    top: 80%;
+    left: 80%;
+    transform: scale(0.9) rotate(-5deg);
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  51% {
+    top: 40%;
+    left: 10%;
+    transform: scale(1.1) rotate(10deg);
+    opacity: 0.9;
+  }
+  70% {
+    opacity: 0.1;
+  }
+  71% {
+    top: 10%;
+    left: 60%;
+    transform: scale(0.9) rotate(-10deg);
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.1;
+  }
+  91% {
+    top: 60%;
+    left: 50%;
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+  100% {
+    top: 60%;
+    left: 50%;
+    transform: scale(1) rotate(0deg);
+    opacity: 0.9;
+  }
+}
